@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Shashank-1202/simple-node-jenkins-demo.git'    
+                git branch: 'master', url: 'https://github.com/Shashank-1202/simple-node-jenkins-demo.git'    
             }
         }
         stage('build') {
