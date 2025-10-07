@@ -14,7 +14,7 @@ pipeline {
         stage('Run container') {
             steps {
                 sh '''
-                     docker rm-f simple-node || true
+                     docker rm -f simple-node || true
                      docker run -d -p 8080:8080 --name simple-node simple-node:${BUILD_NUMBER}
                 '''     
             }
