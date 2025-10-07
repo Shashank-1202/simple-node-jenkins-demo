@@ -15,7 +15,7 @@ pipeline {
             steps {
                 sh '''
                      docker rm -f simple-node || true
-                     docker run -d -p 8080:8080 --name simple-node simple-node:${BUILD_NUMBER}
+                     docker run -d -p 5000:8080 --name simple-node simple-node:${BUILD_NUMBER}
                 '''     
             }
 
