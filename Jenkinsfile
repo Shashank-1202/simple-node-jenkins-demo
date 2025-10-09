@@ -1,24 +1,31 @@
 pipeline {
     agent any 
-    stages {
-        stage('checkout') {
+       stages {
+          stage('checkout') {
             steps {
-                git branch: 'master', url: 'https://github.com/Shashank-1202/simple-node-jenkins-demo.git'    
+                echo 'pulling the repository'
+                git branch: 'master', url: 'https://github.com/Shashank-1202/simple-node-jenkins-demo.git'
+
             }
-        }
-        stage('build') {
-           steps {
-              sh 'docker build -t simple-node:${BUILD_NUMBER} .'
-           }
-        }
-        stage('Run container') {
-            steps {
-                sh '''
-                     docker rm -f simple-node || true
-                     docker run -d -p 5000:8080 --name simple-node simple-node:${BUILD_NUMBER}
-                '''     
+          }
+
+            stage('build') {
+                steps {
+                    echo 'building the image'
+                    sh 'docker build -t simple-node1 .'
+
+                }
             }
 
-        }
-    }
+            stage('Deploy') {
+                steps {
+                    echo 'deploying the image'
+                    sh '''
+                      docker rm -f simple-node1 || true
+                      docker run -d -p 80:80 --name simple-node1 simple-node1
+                    '''
+                }
+            }
+
+       }
 }
